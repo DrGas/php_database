@@ -49,16 +49,19 @@ while($stmt->fetch()) {
 	echo '<li><a href="projectdetails.php?cid='.$cid.'">'.$pnam.' '.$pdesc.' '.$psd.' '.$ped.' '.$popid.'</a></li>';
 }
 ?>
+
 </ul>
 
-</body>
-</html><!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
 
-<body>
+<form action="add.php" method="post">
+<input type="hidden" name="pid" value="<?=$pid?>">
+<input type="hidden" name="pnam" value="<?=$pnam?>">
+<input type="text" name="pdesc" value="<?=$pdesc?>">
+<input type="text" name="psd" value="<?=$psd?>">
+<input type="hidden" name="ped" value="<?=$ped?>">
+<input type="hidden" name="cid" value="<?=$cid?>">
+<input type="submit" value="Delete">
+</form>	
+
 </body>
 </html>
