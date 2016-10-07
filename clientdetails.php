@@ -2,19 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Untitled Document</title>
+<title>Client Details</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
+
 <body>
-<h2>Client info</h2>
+<?php require 'menu.php';?>
+
+<h2>Client Information</h2>
 <?php
 $cid = filter_input(INPUT_GET, 'cid', FILTER_VALIDATE_INT) or die('Missing/illegal parameter');
 
 require_once 'dbcon.php';
 
-$sql = 'SELECT `client-name`, `client-adress`, `client-contact-name`, `client-contact phone`, `zip_code_zip_code_id`
+$sql = 'SELECT `client-name`, `client-adress`, `client-contact-name`, `client-contact-phone`, `zip_code_zip_code_id`
 from client
-where `client-id` = ?;';
+where `client-id` = ?';
 
 $stmt = $link->prepare($sql);
 $stmt->bind_param('i', $cid);
@@ -23,19 +27,51 @@ $stmt->bind_result($cnam, $cadr, $ccnam, $ccphone, $czip);
 
 while($stmt->fetch()) { }
 
-echo '<h2>'.$cnam.'</h1>';
+echo '<h1>'.$cnam.'</h1>' . '<br>';
+?>
+<!--UPDATE DETAILS-->
+	<form class="signupform" action="update.php" method="post">
+    	<input type="hidden" name="$cid" value='<?=$cid?>'> 
+        <input type="text" name="$cnam" placeholder="Client Name"> <br>
+    	<button type="submit" value="Update Name">Update Name</button>
+    </form>
+<?php 
 	//combine to strings and make between them
-	echo '<h5>'.$cadr. ' ' .$czip.'</h5>';
-	echo '<h5>'.$ccnam.'</h5>';
-	echo '<h5>'.$ccphone.'</h5>';
+	/*sql in sql to call two different tables with ZIP to get ZIP code and the city */
+	echo '<h3>'.'Address:'.'</h3>';
+	echo '<p>'.$cadr. ' ' .$czip.'</p>';
+	?>
+    <?php 
+    $sql = 'SELECT `City` 
+	FROM `Zip_Code` 
+	WHERE `Zip_Code_ID` = ?';
+
+$stmt = $link->prepare($sql);
+$stmt->bind_param('i', $czip);
+$stmt->execute();
+$stmt->bind_result($ci);
+
+while($stmt->fetch()) { 
+	echo '<p>'.$ci.'</p>';
+	?>
+    
+    <?php
+	echo '<h3>'.'Project Contact:'.'</h3>';
+	echo '<p>'.$ccnam.'</p>';
+	echo '<h3>'.'Contact Number:'.'</h3>';
+	echo '<p>'.$ccphone.'</p>';
+}
 ?>
 </ul>
+   
+<br>   
 
 <h2>Projects</h2>
 <ul>
+<!--PROJECTS-->
 <?php 
 
-$sql = 'select `project-name`, `project-description`, `project-start-date`, `project-end-date`, `other-project-details`
+$sql = 'select `project-id`, `project-name`
 from `project`
 where `project-id` = ?
 and `client-id` = `client-id`';
@@ -43,25 +79,14 @@ and `client-id` = `client-id`';
 $stmt = $link->prepare($sql);
 $stmt->bind_param('i', $cid);
 $stmt->execute();
-$stmt->bind_result($pnam, $pdesc, $psd, $ped, $popid);
+$stmt->bind_result($pid, $pnam);
 
 while($stmt->fetch()) { 
-	echo '<li><a href="projectdetails.php?cid='.$cid.'">'.$pnam.' '.$pdesc.' '.$psd.' '.$ped.' '.$popid.'</a></li>';
+	echo '<li><a href="projectdetails.php?cid='.$cid.'">'.$pnam.'</a>'; 
 }
-?>
-
+	?>	
 </ul>
 
-
-<form action="add.php" method="post">
-<input type="hidden" name="pid" value="<?=$pid?>">
-<input type="hidden" name="pnam" value="<?=$pnam?>">
-<input type="text" name="pdesc" value="<?=$pdesc?>">
-<input type="text" name="psd" value="<?=$psd?>">
-<input type="hidden" name="ped" value="<?=$ped?>">
-<input type="hidden" name="cid" value="<?=$cid?>">
-<input type="submit" value="Delete">
-</form>	
 
 </body>
 </html>
