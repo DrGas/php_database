@@ -2,33 +2,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Untitled Document</title>
+<title>Add</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
 <?php
-$cid = filter_input(INPUT_POST, 'cid', FILTER_VALIDATE_INT) or die('Missing/illegal parameter');
-$pid = filter_input(INPUT_POST, 'pid', FILTER_VALIDATE_INT) or die('Missing/illegal parameter');
+/*different numbers in the error 'illegal paramiter 2' to know which is the one that couse error*/
+$cnam = filter_input(INPUT_POST, '$cnam', FILTER_SANITIZE_STRING) or die('Missing/illegal parameter1');
+$cad = filter_input(INPUT_POST, '$cad', FILTER_SANITIZE_STRING) or die('Missing/illegal parameter2');
+$ccnam = filter_input(INPUT_POST, '$ccnam', FILTER_SANITIZE_STRING) or die('Missing/illegal parameter3');
+$cphone = filter_input(INPUT_POST, '$cphone', FILTER_VALIDATE_INT) or die('Missing/illegal parameter4');
+$czip = filter_input(INPUT_POST, '$czip', FILTER_VALIDATE_INT) or die('Missing/illegal parameter5');
 
 require_once 'dbcon.php';
 
-$sql = 'INSERT INTO Project(`Project-ID`, `Project-Name`, `Project-Description`, `Project-Start-Date`, `Project-End-Date`, `CLIENT-ID`)
-VALUES(?, ?, ?, ?, ?, ?)';
+$sql = 'INSERT INTO `Client`(`Client-Name`, `Client-Adress`, `Client-Contact-Name`, `Client-Contact-Phone`, `Zip_Code_Zip_Code_ID`) VALUES (?, ?, ?, ?, ?)';
 $stmt = $link->prepare($sql);
-$stmt->bind_param('issssi', $pid, $pnam, $pdesc, $psd, $ped, $cid);
+$stmt->bind_param('sssii', $cnam, $cad, $ccnam, $cphone, $czip);
 $stmt->execute();
-
 if ($stmt->affected_rows >0 ){
-	echo 'Project added ';
+	echo 'Client added!';
 }
 else {
-	echo 'No change - project whatever';
+	echo 'No change - client was already added';
 //	echo $stmt->error;
 }
 ?>
-<hr>
-<a href="clientdetails.php?fid=<?=$cid?>">Client Details</a><br>
-<a href="clientprojects.php?cid=<?=$pid?>">Client Projects</a><br>
-
-</body>
-</html>
+<br><br>
+<a href="index.php?cid=<?=$cid?>">Back to clients</a><br>
