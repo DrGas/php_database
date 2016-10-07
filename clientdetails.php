@@ -32,7 +32,7 @@ echo '<h1>'.$cnam.'</h1>' . '<br>';
 <!--UPDATE DETAILS-->
 	<form class="signupform" action="update.php" method="post">
     	<input type="hidden" name="$cid" value='<?=$cid?>'> 
-        <input type="text" name="$cnam" placeholder="Client Name"> <br>
+        <input type="text" name="$cnam" placeholder="Client Name" required> <br>
     	<button type="submit" value="Update Name">Update Name</button>
     </form>
 <?php 

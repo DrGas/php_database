@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<?php require 'menu.php';?>
 <?php
 /*different numbers in the error 'illegal paramiter 2' to know which is the one that couse error*/
 $cnam = filter_input(INPUT_POST, '$cnam', FILTER_SANITIZE_STRING) or die('Missing/illegal parameter1');
