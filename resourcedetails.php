@@ -16,7 +16,7 @@ $cid = filter_input(INPUT_GET, 'cid', FILTER_VALIDATE_INT) or die('Missing/illeg
 
 require_once 'dbcon.php';
 $sql = 'SELECT `Resource-Name`, `Resource_Detail`, `Resource-Type-Code-ID` 
-FROM `Resources` 
+FROM `resources` 
 where `Resources-ID` = ?';
 
 $stmt = $link->prepare($sql);
@@ -32,7 +32,7 @@ while($stmt->fetch()) {
 	
 }
 ?>
- <form class="signupform" type="button" action="allresources.php" method="get">
+ <form class="new-form" type="button" action="allresources.php" method="get">
  	<button>See all resources</button>
 </form>
 </ul>
@@ -41,7 +41,7 @@ while($stmt->fetch()) {
 <ul>
 <?php 
 
-$sql = 'SELECT `Project-ID`, `Resources-ID` from Project_has_Resources 
+$sql = 'SELECT `Project-ID`, `Resources-ID` from project_has_resources 
 WHERE `Resources-ID` = ?';
 
 $stmt = $link->prepare($sql);
@@ -56,7 +56,7 @@ while($stmt->fetch()) {
 }
 ?>
 </ul>
-<form class="signupform" action="delete.php" method="post">
+<form class="new-form" action="delete.php" method="post">
     	<input type="text" name="pid" placeholder="Project ID"><br>
         <input type="text" name="rid" placeholder="Resource ID"><br>
     	<button type="submit" value="Delete Resource">Delete Resource</button>

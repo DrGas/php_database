@@ -17,7 +17,7 @@
 
 require_once 'dbcon.php';
 /*without ? paramiter so no bind_paramiter - placeholder, only bind_resoult if SELECT statement*/
-$sql = 'SELECT `Resource-Name`, `Resource_Detail`, `Resource-Type-Code-ID` FROM Resources ORDER BY `Resource-Type-Code-ID`';
+$sql = 'SELECT `Resource-Name`, `Resource_Detail`, `Resource-Type-Code-ID` FROM resources ORDER BY `Resource-Type-Code-ID`';
 
 $stmt = $link->prepare($sql);
 $stmt->execute();

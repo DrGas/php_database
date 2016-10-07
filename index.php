@@ -18,7 +18,7 @@
 require_once 'dbcon.php';
 
 
-$sql = 'SELECT `CLIENT-ID`, `Client-Name` FROM `Client` ORDER BY `Client-Name`';
+$sql = 'SELECT `CLIENT-ID`, `Client-Name` FROM `client` ORDER BY `Client-Name`';
 $stmt = $link->prepare($sql);
 $stmt->execute();
 $stmt->bind_result($cid, $cnam);

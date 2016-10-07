@@ -16,9 +16,9 @@ $cid = filter_input(INPUT_GET, 'cid', FILTER_VALIDATE_INT) or die('Missing/illeg
 
 require_once 'dbcon.php';
 
-$sql = 'SELECT `client-name`, `client-adress`, `client-contact-name`, `client-contact-phone`, `zip_code_zip_code_id`
+$sql = 'SELECT `Client-Name`, `Client-Adress`, `Client-Contact-Name`, `Client-Contact-Phone`, `Zip_Code_Zip_Code_ID`
 from client
-where `client-id` = ?';
+where `CLIENT-ID` = ?';
 
 $stmt = $link->prepare($sql);
 $stmt->bind_param('i', $cid);
@@ -30,7 +30,7 @@ while($stmt->fetch()) { }
 echo '<h1>'.$cnam.'</h1>' . '<br>';
 ?>
 <!--UPDATE DETAILS-->
-	<form class="new-client-form" action="update.php" method="post">
+	<form class="new-form" action="update.php" method="post">
     	<input type="hidden" name="$cid" value='<?=$cid?>'> 
         <input type="text" name="$cnam" placeholder="New client name" required> <br>
     	<button type="submit" value="Update Name">Update Name</button><br><br>
@@ -43,7 +43,7 @@ echo '<h1>'.$cnam.'</h1>' . '<br>';
 	?>
     <?php 
     $sql = 'SELECT `City` 
-	FROM `Zip_Code` 
+	FROM `zip_code` 
 	WHERE `Zip_Code_ID` = ?';
 
 $stmt = $link->prepare($sql);
@@ -71,10 +71,10 @@ while($stmt->fetch()) {
 <!--PROJECTS-->
 <?php 
 
-$sql = 'select `project-id`, `project-name`
+$sql = 'SELECT `Project-ID`, `Project-Name`
 from `project`
-where `project-id` = ?
-and `client-id` = `client-id`';
+where `Project-ID` = ?
+and `CLIENT-ID` = `CLIENT-ID`';
 
 $stmt = $link->prepare($sql);
 $stmt->bind_param('i', $cid);

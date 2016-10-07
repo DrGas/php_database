@@ -13,7 +13,7 @@ $cid = filter_input(INPUT_POST, '$cid', FILTER_VALIDATE_INT) or die('Missing/ill
 
 require_once 'dbcon.php';
 /*UPDATE needs SET (specific table and row) and WHERE - otherwise it will change all the names*/
-$sql = 'UPDATE `Client` 
+$sql = 'UPDATE `client` 
 SET `Client-Name` = ?
 WHERE `Client-ID` = ?';
 
@@ -23,10 +23,10 @@ $stmt->execute();
 //$stmt->bind_result($cid, $cnam);
 
 if ($stmt->affected_rows >0 ){
-	echo 'Information Updated';
+	echo '<h2>' . 'Information Updated' . '<h2>';
 }
 else {
-	echo 'No change';
+	echo '<h2>' . 'No change' . '<h2>';
 
 }
 ?>

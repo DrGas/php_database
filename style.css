@@ -188,13 +188,13 @@ nav ul form input {
 	body { background-color:#D8DADB;
 		}
 		
-	.new-client-form {
+	.new-form {
 		margin: 0, auto;
 		text-align: center;
 		
 		}
 		
-	new-client-form input{
+	new-form input{
 		font-family: 'Open Sans', sans-serif;
 		font-size: 16px;
 		border:none;

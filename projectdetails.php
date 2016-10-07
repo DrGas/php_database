@@ -33,10 +33,10 @@ echo '<h1>'.$cnam.'</h1>';
 <ul>
 <?php 
 
-$sql = 'select `project-name`, `project-description`, `project-start-date`, `project-end-date`, `other-project-details`
+$sql = 'select `Project-Name`, `Project-Description`, `Project-Start-Date`, `Project-End-Date`, `Other-Project-Details`
 from `project`
-where `project-id` = ?
-and `client-id` = `client-id`';
+where `Project-ID` = ?
+and `CLIENT-ID` = `CLIENT-ID`';
 
 $stmt = $link->prepare($sql);
 $stmt->bind_param('i', $cid);
@@ -61,7 +61,7 @@ while($stmt->fetch()) {
 <ul>
 <?php 
 $sql = 'SELECT `Resource-Name` 
-FROM Resources WHERE `Resources-ID` = ?';
+FROM resources WHERE `Resources-ID` = ?';
 $stmt = $link->prepare($sql);
 $stmt->bind_param('i', $cid);
 $stmt->execute();

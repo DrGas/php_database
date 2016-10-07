@@ -15,7 +15,7 @@ $rid = filter_input(INPUT_POST, 'rid', FILTER_VALIDATE_INT) or die('Missing/ille
 
 require_once 'dbcon.php';
 
-$sql = 'DELETE FROM `Project_has_Resources` 
+$sql = 'DELETE FROM `project_has_resources` 
 WHERE `Project-ID` = ? 
 AND `Resources-ID` = ?';
 
@@ -25,10 +25,10 @@ $stmt->execute();
 //$stmt->bind_result($pid, $rid);
 
 if ($stmt->affected_rows >0 ){
-	echo 'Resource deleted';
+	echo '<h2>' . 'Resource deleted' . '<h2>';
 }
 else {
-	echo 'No change - resource stil existing';
+	echo '<h2>' . 'No change - resource stil existing' . '<h2>' ;
 
 }
 
