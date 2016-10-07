@@ -30,10 +30,10 @@ while($stmt->fetch()) { }
 echo '<h1>'.$cnam.'</h1>' . '<br>';
 ?>
 <!--UPDATE DETAILS-->
-	<form class="signupform" action="update.php" method="post">
+	<form class="new-client-form" action="update.php" method="post">
     	<input type="hidden" name="$cid" value='<?=$cid?>'> 
-        <input type="text" name="$cnam" placeholder="Client Name" required> <br>
-    	<button type="submit" value="Update Name">Update Name</button>
+        <input type="text" name="$cnam" placeholder="New client name" required> <br>
+    	<button type="submit" value="Update Name">Update Name</button><br><br>
     </form>
 <?php 
 	//combine to strings and make between them
